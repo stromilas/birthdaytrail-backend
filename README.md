@@ -6,18 +6,14 @@ BirthdayTrail is a mobile progressive web SPA
 
 #### Backend
 + Node.js
++ Express
 + MVC pattern
 + RESTful JSON API
++ JWT - Authentication
 
-#### Progressive
-+ Installable - _manifest.json_
-+ Cache API
-+ Notification API
-
-#### Style
-+ SCSS pre-processor
-+ BEM naming methodology
-+ Optimised CSS animations
+#### Database
++ MongoDB
++ Mongoose
 
 ***
 ### Build Setup

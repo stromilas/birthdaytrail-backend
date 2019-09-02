@@ -12,7 +12,7 @@ const birthdayRoutes = require('./routes/birthday.js');
 const subscriptionRoutes = require('./routes/subscription.js');
 
 const corsOptions = {
-	origin: '*'
+	origin: process.env.CROSS_ORIGIN
 }
 
 app.use(cors(corsOptions));
@@ -24,18 +24,12 @@ app.use(birthdayRoutes);
 app.use(authRoutes);
 app.use(subscriptionRoutes);
 
-app.get('/delay', (req, res) => {
-	setTimeout(() => {
-		res.json({response: 'delayed message'});
-	}, 1000);
-});
-
 app.get('/*', (req, res) => res.status(404).send({message: "Resource not found"}));
 
 notificationLoop(1000 * 60);
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true })
 	.then(() => {
-		app.listen(8081, () => console.log('Launching server...'));
+		app.listen(process.env.PORT, () => console.log('Launching server...'));
 	})
 	.catch(err => {
 		console.log('Error connecting to MongoDB', err);
