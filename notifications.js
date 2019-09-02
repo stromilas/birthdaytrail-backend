@@ -8,9 +8,9 @@ module.exports = (interval) => {
 	setInterval(loop, interval);
 }
 
-const PRIV_KEY = 'XEH9apJ2rW6aPdxEQVPPXzedKAat5sgDw4PmB_VakHc';
-const PUB_KEY = 'BD04DSiATJCOJVyvhqrx3ym1cB0G3sUeXMGWtEoX6-SJvON-_Xdlfj_F2ImP4hHS5ySCGpUja4u44f8OcatO-gw';
-const MAIL = 'mailto:js16968@essex.ac.uk';
+const PRIV_KEY = process.env.PRIV_KEY
+const PUB_KEY = process.env.PUB_KEY;
+const MAIL = process.env.MAIL;
 var loopHasFinished = true;
 
 webpush.setVapidDetails(MAIL, PUB_KEY, PRIV_KEY);
