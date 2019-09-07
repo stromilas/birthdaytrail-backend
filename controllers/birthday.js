@@ -2,7 +2,7 @@ const User = require('../models/User.js');
 
 exports.postBirthdays = (req, res, next) => {
   if(!req.body.name || !req.body.dob) {
-    res.status(412).json({message: 'Bad input'})
+    res.status(412).end();
   }
 
   const birthday = {
