@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const webpush = require('web-push');
 const User = require('./models/User');
 const date = require('./date.js');
-
+require('dotenv').config();
 
 module.exports = (interval) => {
 	setInterval(loop, interval);
@@ -11,6 +11,7 @@ module.exports = (interval) => {
 const PRIV_KEY = process.env.PRIV_KEY
 const PUB_KEY = process.env.PUB_KEY;
 const MAIL = process.env.MAIL;
+
 var loopHasFinished = true;
 
 webpush.setVapidDetails(MAIL, PUB_KEY, PRIV_KEY);
