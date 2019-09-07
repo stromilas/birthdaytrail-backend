@@ -11,6 +11,8 @@ const authRoutes = require('./routes/auth.js');
 const birthdayRoutes = require('./routes/birthday.js');
 const subscriptionRoutes = require('./routes/subscription.js');
 
+const NOTIF_LOOP_INTERVAL = 1000 * 60 * 60 * 1;   // 1 hour
+
 const corsOptions = {
   origin: process.env.CROSS_ORIGIN
 }
@@ -24,12 +26,12 @@ app.use(birthdayRoutes);
 app.use(authRoutes);
 app.use(subscriptionRoutes);
 
-app.get('/*', (req, res) => res.status(404).send({message: "Resource not found"}));
+app.get('/*', (req, res) => res.status(404).end());
 
-notificationLoop(1000 * 60);
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true })
   .then(() => {
     app.listen(process.env.PORT, () => console.log('Launching server...'));
+    notificationLoop(NOTIF_LOOP_INTERVAL);
   })
   .catch(err => {
     console.log('Error connecting to MongoDB', err);
