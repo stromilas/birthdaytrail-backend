@@ -5,7 +5,6 @@ const isAuth = require('../middleware/isAuth.js');
 const router = express.Router();
 
 router.post('/login', authController.postLogin);
-
 router.post('/signup', authController.postSignUp);
 
 module.exports = router;
