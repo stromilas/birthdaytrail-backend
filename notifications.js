@@ -11,6 +11,7 @@ module.exports = (interval) => {
 const PRIV_KEY = process.env.PRIV_KEY
 const PUB_KEY = process.env.PUB_KEY;
 const MAIL = process.env.MAIL;
+const NOTIF_DAY_RANGE = 7;
 
 var loopHasFinished = true;
 
@@ -29,7 +30,7 @@ function loop() {
           user.birthdays.forEach((birthday) => {
             const daysLeft = Math.ceil(date.getDays(birthday.dob));
 
-            if(daysLeft < 14 && !birthday.notified) {
+            if(daysLeft < NOTIF_DAY_RANGE && !birthday.notified) {
               user.subscriptions.forEach((sub) => {
                 sendNotification(sub, birthday, daysLeft);
               });
@@ -43,7 +44,6 @@ function loop() {
           });
 
           if(userModified) {
-            console.log('Saved user');
             user.save();
           }
         }
@@ -68,9 +68,6 @@ function sendNotification(subscription, birthday, daysLeft) {
   });
 
   webpush.sendNotification(subscription, payload)
-    .then(() => {
-      console.log('Notification sent!');
-    })
     .catch(err => {
       console.log(err);
     });
