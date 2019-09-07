@@ -15,18 +15,15 @@ module.exports = (req, res, next) => {
         next();
       }
       else {
-        res.status(401);
-        res.json({message: 'Bad token'});
+        res.status(401).end();
       }
     }
     catch(err) {
-      res.status(401);
-      res.json({message: 'Error while decoding'});
+      res.status(400).end();
     }
   }
   else {
-    res.status(401);
-    res.json({message: 'No token'});
+    res.status(401).end();
   }
 
 };
